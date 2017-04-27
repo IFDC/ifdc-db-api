@@ -19,7 +19,17 @@ public class Read {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String readAll() {
-        return "ALL";
+        StringBuilder ret = new StringBuilder();
+        File dir = new File("uploaded");
+        if (!dir.exists()) {
+            return "Nothing found";
+        }
+        for (File f : dir.listFiles()) {
+            
+            ret.append(f.getName()).append("<br />");
+            
+        }
+        return ret.toString();
     }
     
     @GET
@@ -28,6 +38,9 @@ public class Read {
     public String readXlsx() {
         StringBuilder ret = new StringBuilder();
         File dir = new File("uploaded");
+        if (!dir.exists()) {
+            return "Nothing found";
+        }
         for (File f : dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
