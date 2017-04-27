@@ -1,4 +1,4 @@
-package com.example;
+package org.ifdc;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
