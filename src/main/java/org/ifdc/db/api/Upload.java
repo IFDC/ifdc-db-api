@@ -1,4 +1,4 @@
-package org.ifdc.api;
+package org.ifdc.db.api;
 
 import java.io.File;
 import java.io.FileOutputStream;

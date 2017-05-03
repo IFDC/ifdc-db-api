@@ -1,4 +1,4 @@
-package org.ifdc.api;
+package org.ifdc.db.api;
 
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;

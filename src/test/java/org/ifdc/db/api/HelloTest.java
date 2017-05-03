@@ -1,4 +1,4 @@
-package com.example;
+package org.ifdc.db.api;
 
 import javax.ws.rs.core.Application;
 
@@ -8,13 +8,11 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-import org.ifdc.MyResource;
-
-public class MyResourceTest extends JerseyTest {
+public class HelloTest extends JerseyTest {
 
     @Override
     protected Application configure() {
-        return new ResourceConfig(MyResource.class);
+        return new ResourceConfig(Hello.class);
     }
 
     /**
@@ -22,7 +20,7 @@ public class MyResourceTest extends JerseyTest {
      */
     @Test
     public void testGetIt() {
-        final String responseMsg = target().path("myresource").request().get(String.class);
+        final String responseMsg = target().path("hello").request().get(String.class);
 
         assertEquals("Hello, Heroku!", responseMsg);
     }

@@ -1,4 +1,4 @@
-package org.ifdc.heroku;
+package org.ifdc.db;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
