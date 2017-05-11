@@ -1,4 +1,4 @@
-package org.ifdc.db.api;
+package org.ifdc.db.api.sample;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

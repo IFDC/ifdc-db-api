@@ -1,5 +1,6 @@
 package org.ifdc.db.api;
 
+import org.ifdc.db.api.sample.Hello;
 import javax.ws.rs.core.Application;
 
 import org.glassfish.jersey.server.ResourceConfig;

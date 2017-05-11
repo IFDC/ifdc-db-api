@@ -1,6 +1,8 @@
 package org.ifdc.db.api;
 
+import ch.qos.logback.classic.Logger;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoWriteException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import javax.ws.rs.Consumes;
@@ -16,6 +18,7 @@ import org.bson.Document;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.ifdc.db.util.DBUtil;
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -24,22 +27,28 @@ import org.mindrot.jbcrypt.BCrypt;
 @Path("user")
 public class UserAPI {
     
+    private final static Logger LOG = (Logger) LoggerFactory.getLogger(UserAPI.class);
+    
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String help(@DefaultValue("unknow user") @QueryParam("user") String user) {
-        return "user/<user_name>/ : searching user ";
+        return "user/find/<user_name>/ : searching user /r/n" +
+               "user/register?userName&password&rank/ : register user /r/n";
     }
     
     @GET
-    @Path("{userName: [a-zA-Z][a-zA-Z_0-9]*}")
+    @Path("find/{userName: [a-zA-Z][a-zA-Z_0-9]*}")
     @Produces(MediaType.APPLICATION_JSON)
     public String findByUserName(@PathParam("userName") String userName) {
-        
         try (MongoClient mongoClient = new MongoClient(DBUtil.getDBURI());) {
 
             MongoDatabase database = mongoClient.getDatabase("ifdc_db");
             MongoCollection<Document> collection = database.getCollection("users");
-            return collection.find(new Document("userName", userName)).first().toJson();
+            Document ret = collection.find(new Document("userName", userName)).first();
+            if (ret == null) {
+                return "";
+            }
+            return ret.toJson();
         }
 //        HashMap<String, String> ret = new HashMap<>();
 //        ret.put("userName", userName);
@@ -57,9 +66,9 @@ public class UserAPI {
     @Path("register")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public boolean registerUserByPost(
-            @FormDataParam("userName") @QueryParam("userName") String userName,
-            @FormDataParam("password") @QueryParam("password") String password,
-            @FormDataParam("userRank") @QueryParam("userRank") @DefaultValue("regular") String userRank) {
+            @FormDataParam("userName") String userName,
+            @FormDataParam("password") String password,
+            @FormDataParam("userRank") @DefaultValue("regular") String userRank) {
         return registerUser(userName, password, userRank);
     }
     
@@ -78,7 +87,10 @@ public class UserAPI {
         }
         String salt = BCrypt.gensalt();
         String hashedPassword = BCrypt.hashpw(password, salt);
-        
+        System.out.println(userName);
+        System.out.println(salt);
+        System.out.println(hashedPassword);
+        System.out.println(userRank);
         try (MongoClient mongoClient = new MongoClient(DBUtil.getDBURI());) {
      
             MongoDatabase database = mongoClient.getDatabase("ifdc_db");
@@ -91,10 +103,13 @@ public class UserAPI {
                     .append("salt", salt)
                     .append("hashedPassword", hashedPassword)
                     .append("userRank", userRank));
+             
             return true;
+        } catch (MongoWriteException ex) {
+            LOG.warn(ex.getMessage());
         } catch (Exception ex) {
             ex.printStackTrace();
-            return false;
         }
+        return false;
     }
 }

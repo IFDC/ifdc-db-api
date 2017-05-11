@@ -1,9 +1,11 @@
+package org.ifdc.db.api.sample;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.ifdc.db.util;
+
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;

@@ -91,7 +91,11 @@
             <artifactId>jbcrypt</artifactId>
             <version>0.3m</version>
         </dependency>
-
+<!--        <dependency>
+            <groupId>org.ifdc.db</groupId>
+            <artifactId>ifdc-db-util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>-->
 
     </dependencies>
 
@@ -104,8 +108,8 @@
                 <version>2.5.1</version>
                 <inherited>true</inherited>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
