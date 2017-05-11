@@ -81,11 +81,11 @@
         </dependency>
         
         <!-- https://mvnrepository.com/artifact/com.dropbox.core/dropbox-core-sdk -->
-        <dependency>
+<!--        <dependency>
             <groupId>com.dropbox.core</groupId>
             <artifactId>dropbox-core-sdk</artifactId>
             <version>3.0.2</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver</artifactId>
