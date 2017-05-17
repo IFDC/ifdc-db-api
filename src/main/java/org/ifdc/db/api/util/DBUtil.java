@@ -1,4 +1,4 @@
-package org.ifdc.db.util;
+package org.ifdc.db.api.util;
 
 import com.mongodb.MongoClientURI;
 

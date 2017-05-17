@@ -18,7 +18,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.bson.Document;
 import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.ifdc.db.util.DBUtil;
+import org.ifdc.db.api.util.DBUtil;
 import org.slf4j.LoggerFactory;
 
 /**

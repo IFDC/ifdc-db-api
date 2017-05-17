@@ -23,7 +23,6 @@ public class Hello {
     
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("")
     public String test2() {
         return "Hello, Heroku!";
     }
